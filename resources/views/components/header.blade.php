@@ -6,7 +6,11 @@
 
     <!-- Menu -->
     <div class="d-flex flex-row gap-4 align-items-center">
-        <p class="fw-bold mb-0">Home</p>
+        <p class="fw-bold mb-0">
+            <a class="text-white text-decoration-none" href="/home" role="button">
+                Home
+            </a>
+        </p>
         <p class="fw-bold mb-0">
             <a class="text-white text-decoration-none" data-bs-toggle="collapse" href="#browseForm" role="button"
                 aria-expanded="false" aria-controls="browseForm">

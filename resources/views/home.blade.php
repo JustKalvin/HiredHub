@@ -61,7 +61,7 @@
             text-align: center;
             color: white;
             /* padding: 1rem 0; */
-            background-color: #172B4D;
+            margin-top: auto;
         }
     </style>
 </head>

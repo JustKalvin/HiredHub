@@ -1,5 +1,5 @@
-<footer>
-    <div class="container-fluid mt-5" style="background-color: #A1ABD1;">
+<footer class="mt-auto">
+    <div class="container-fluid mt-5 py-5" style="background-color: #A1ABD1;">
         <div class="row text-center text-md-start g-4">
 
             <!-- Logo & tagline -->
@@ -39,6 +39,9 @@
                 </div>
             </div>
 
+        </div>
+        <div>
+            &copy; HiredHub 2025
         </div>
     </div>
 </footer>
