@@ -33,21 +33,29 @@
     <div class="d-flex justify-content-center align-items-start pt-5 w-100 h-100"
         style="background-color: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">
 
-        <form action="{{ route('job.find') }}" method="POST" class="p-4 position-relative"
-            style="background-color:#172B4D; border-radius:10px; width:300px;">
+        <form action="{{ route('job.find') }}" method="POST" enctype="multipart/form-data"
+            class="p-4 position-relative" style="background-color:#172B4D; border-radius:10px; width:300px;">
             @csrf
             <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2"
                 aria-label="Close" data-bs-toggle="collapse" data-bs-target="#browseForm">
             </button>
 
             <div class="mb-3">
-                <label for="keyword" class="form-label text-white">Keywords</label>
+                <label for="keywords" class="form-label text-white">Keywords</label>
                 <input type="text" name="keywords" class="form-control" id="keywords" placeholder="Enter keyword">
             </div>
+
             <div class="mb-3">
                 <label for="geoId" class="form-label text-white">Geo ID</label>
                 <input type="text" name="geoId" class="form-control" id="geoId" placeholder="Enter Geo ID">
             </div>
+
+            <!-- Tambahan: Upload PDF -->
+            <div class="mb-3">
+                <label for="cvFile" class="form-label text-white">Upload CV (PDF)</label>
+                <input type="file" name="file" class="form-control" id="cvFile" accept="application/pdf">
+            </div>
+
             <button type="submit" class="btn btn-primary w-100">Search</button>
         </form>
 
