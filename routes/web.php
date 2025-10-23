@@ -57,3 +57,5 @@ Route::get('testlogin', function () {
 Route::get('/test', function () {
     return view('test');
 });
+
+Route::post('/remindme', [JobController::class, 'remind'])->name('remind');

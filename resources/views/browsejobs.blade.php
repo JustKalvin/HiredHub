@@ -64,7 +64,13 @@
     <div class="container py-5">
         {{-- Judul halaman (DIUBAH dari text-black) --}}
         <h1 class="mb-4 fw-bold" style="color: #172B4D">Browse Jobs</h1>
-
+        <h2>{{ $keywords }} : {{ $geoId }}</h2>
+        <form action="{{ route('remind') }}", method="POST">
+            @csrf
+            <input type="text" name="keywords" value="{{ $keywords }}" hidden>
+            <input type="text" name = "geoId" value="{{ $geoId }}" hidden>
+            <button class="fw-bold text-black" type="submit">Remind Me</button>
+        </form>
         {{-- 2. Memeriksa apakah $jobs ada dan merupakan array --}}
         @if (!empty($jobs) && (is_array($jobs) || $jobs instanceof \Illuminate\Support\Collection))
 
