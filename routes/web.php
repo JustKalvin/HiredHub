@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -59,3 +60,6 @@ Route::get('/test', function () {
 });
 
 Route::post('/remindme', [JobController::class, 'remind'])->name('remind');
+
+Route::get('/certificate', [CertificateController::class, 'index'])->name('certificate.index');
+Route::post('/certificate', [CertificateController::class, 'find'])->name('certificate.find');

@@ -69,7 +69,9 @@
             @csrf
             <input type="text" name="keywords" value="{{ $keywords }}" hidden>
             <input type="text" name = "geoId" value="{{ $geoId }}" hidden>
-            <button class="fw-bold text-black" type="submit">Remind Me</button>
+            <button class="fw-bold btn" style="background-color: #172b4d; color: white" type="submit">
+                Remind Me
+            </button>
         </form>
         {{-- 2. Memeriksa apakah $jobs ada dan merupakan array --}}
         @if (!empty($jobs) && (is_array($jobs) || $jobs instanceof \Illuminate\Support\Collection))

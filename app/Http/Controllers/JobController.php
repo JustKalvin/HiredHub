@@ -22,14 +22,14 @@ class JobController extends Controller
                 'file',                      // nama field file
                 file_get_contents($file),    // isi file
                 $file->getClientOriginalName() // nama file aslinya
-            )->post('https://upinganteng123.app.n8n.cloud/webhook-test/jobscrapping', [
+            )->post('https://fiabeg7kldnf.app.n8n.cloud/webhook-test/jobscrapping', [
                 'keywords' => $keywords,
                 'geoId' => $geoId
             ]);
         }
         // Jika tidak ada file, kirim tanpa attach()
         else {
-            $response = Http::post('https://upinganteng123.app.n8n.cloud/webhook-test/jobscrapping', [
+            $response = Http::post('https://fiabeg7kldnf.app.n8n.cloud/webhook-test/jobscrapping', [
                 'keywords' => $keywords,
                 'geoId' => $geoId
             ]);

@@ -17,6 +17,11 @@
                 Browse Jobs
             </a>
         </p>
+        <p class="fw-bold mb-0">
+            <a class="text-white text-decoration-none" href="/certificate" role="button">
+                Certificate
+            </a>
+        </p>
         <p class="fw-bold mb-0">About</p>
     </div>
 
@@ -52,7 +57,11 @@
 
             <!-- Tambahan: Upload PDF -->
             <div class="mb-3">
-                <label for="cvFile" class="form-label text-white">Upload CV (PDF)</label>
+                <div class="d-flex flex-row align-items-center">
+                    <label for="cvFile" class="form-label text-white">Upload CV (PDF)</label>
+                    <img class="ms-2 mb-2" style="width : 30px" src="{{ asset('images/AI.png') }}" alt="AI">
+                </div>
+
                 <input type="file" name="file" class="form-control" id="cvFile" accept="application/pdf">
             </div>
 
