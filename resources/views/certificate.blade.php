@@ -35,6 +35,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <x-chatbot />
     <div style="background-color: #172B4D">
         @include('components.header')
     </div>

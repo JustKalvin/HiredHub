@@ -67,7 +67,7 @@
 </head>
 
 <body style="background-color:#172B4D; margin:0;">
-
+    <x-chatbot />
     <div class="hero-container">
         <!-- Background Image -->
         <img class="hero-container-img" src="./images/HomeBackground.png" alt="Home Background" class="d-block">

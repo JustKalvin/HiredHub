@@ -55,6 +55,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <x-chatbot />
     {{-- 1. Menggunakan component header --}}
     <div style="background-color: #172B4D">
         @include('components.header')
