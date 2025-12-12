@@ -8,7 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('home');
+    if (Auth::check()) {
+        return view('home');
+    }
+    return view('login');
 });
 
 Route::get('/home', function () {
