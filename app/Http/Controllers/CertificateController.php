@@ -17,8 +17,8 @@ class CertificateController extends Controller
     public function find(Request $request)
     {
         $keyword = $request->keyword;
-
-        $response = Http::post('https://fiabeg7kldnf.app.n8n.cloud/webhook/certificate', [
+        $certificateUrl = env('N8N_CERTIFICATE_WEBHOOK_URL');
+        $response = Http::post($certificateUrl, [
             'keyword' => $keyword
         ]);
 

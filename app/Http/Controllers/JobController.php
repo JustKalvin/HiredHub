@@ -15,21 +15,21 @@ class JobController extends Controller
         $keywords = $request->input('keywords');
         $geoId = $request->input('geoId');
         $file = $request->file('file');
-
+        $jobScrappingUrl = env('N8N_JOB_SCRAPPING_WEBHOOK_URL');
         // Jika ada file, kirim dengan attach()
         if ($file) {
             $response = Http::attach(
                 'file',                      // nama field file
                 file_get_contents($file),    // isi file
                 $file->getClientOriginalName() // nama file aslinya
-            )->post('https://fiabeg7kldnf.app.n8n.cloud/webhook-test/jobscrapping', [
+            )->post($jobScrappingUrl, [
                 'keywords' => $keywords,
                 'geoId' => $geoId
             ]);
         }
         // Jika tidak ada file, kirim tanpa attach()
         else {
-            $response = Http::post('https://fiabeg7kldnf.app.n8n.cloud/webhook-test/jobscrapping', [
+            $response = Http::post($jobScrappingUrl, [
                 'keywords' => $keywords,
                 'geoId' => $geoId
             ]);
@@ -56,7 +56,7 @@ class JobController extends Controller
         $email = strtolower(Auth::user()->email);
         $keyword = strtolower($request->keywords);
         $geoId = strtolower($request->geoId);
-
+        $remindInsertUrl = env('N8N_REMIND_INSERT_WEBHOOK_URL');
         // Cek apakah kombinasi email + keyword sudah ada
         $existing = UserRemind::where('user_email', $email)
             ->where('user_keyword', $keyword)
@@ -77,7 +77,7 @@ class JobController extends Controller
         ]);
 
         // Kirim data ke N8N
-        $response = Http::post('https://upinganteng123.app.n8n.cloud/webhook-test/inserttrigger', [
+        $response = Http::post($remindInsertUrl, [
             'user_email' => $remind->user_email,
             'user_keyword' => $remind->user_keyword,
             'user_geoId' => $remind->user_geoId,
@@ -92,5 +92,34 @@ class JobController extends Controller
         }
 
         return view('home');
+    }
+
+    public function see_reminder()
+    {
+        // 1. Ambil email user yang sedang login
+        $email = Auth::user()->email;
+        $seeReminderUrl = env('N8N_SEE_REMINDER_WEBHOOK_URL');
+
+        // 2. Kirim ke webhook N8N
+        $response = Http::post($seeReminderUrl, [
+            'user_email' => $email,
+        ]);
+
+        // 3. Tangani Response
+        if ($response->successful()) {
+            // Asumsi: Respons dari N8N adalah array data reminders (seperti yang Anda berikan)
+            $reminders = $response->json();
+
+            // Kembalikan view 'seereminder' dan kirimkan data reminders
+            return view('seereminder', [
+                'reminders' => $reminders,
+            ]);
+        }
+
+        // Jika gagal (response tidak berhasil), kembalikan view dengan array kosong
+        // dan kirimkan pesan error melalui session (flash message)
+        return view('seereminder', [
+            'reminders' => [],
+        ])->with('error', 'Gagal memuat pengingat lowongan kerja. Silakan coba lagi.');
     }
 }

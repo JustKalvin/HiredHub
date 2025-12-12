@@ -26,10 +26,41 @@
     </div>
 
     <!-- Circle icon -->
-    <div>
-        <div class="rounded-circle"
-            style="width: 50px; height: 50px; background-color: transparent; border: 5px solid white;">
-        </div>
+    <div class="dropdown">
+        <a class="dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="text-decoration: none;">
+            <div class="rounded-circle"
+                style="width: 50px; height: 50px; background-color: white; border: 5px solid white; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                <img src="{{ asset('images/profile.png') }}" alt="Profile Picture"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2"
+            style="border-radius: 10px; min-width: 200px;">
+
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('see.reminder') }}">
+                    <i class="fa-solid fa-bell me-2" style="color: #172B4D;"></i>
+                    Job Reminders
+                </a>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li>
+                <form id="login-form" action="{{ route('login') }}" method="GET" style="display: none;">
+                    @csrf
+                </form>
+                <a class="dropdown-item d-flex align-items-center text-primary" href="{{ route('login') }}"
+                    onclick="event.preventDefault(); document.getElementById('login-form').submit();">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                    Login
+                </a>
+            </li>
+        </ul>
     </div>
 </header>
 

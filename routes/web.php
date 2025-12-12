@@ -21,7 +21,13 @@ Route::get('/home', function () {
 Route::post('/job', [JobController::class, 'find'])->name('job.find');
 
 Route::get('/auth/google', function () {
-    return Socialite::driver('google')->redirect();
+    /** @var \Laravel\Socialite\Two\AbstractProvider $provider */
+    $provider = Socialite::driver('google');
+
+    // Intelephense sekarang akan mengenali method with()
+    return $provider
+        ->with(['prompt' => 'select_account'])
+        ->redirect();
 });
 
 Route::get('/auth/google/callback', function () {
@@ -38,7 +44,7 @@ Route::get('/auth/google/callback', function () {
 
     Auth::login($user);
 
-    return redirect('/login');
+    return redirect('/');
 });
 
 
@@ -52,7 +58,7 @@ Route::get('/logout', function () {
 
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 
 Route::get('testlogin', function () {
     return view('testlogin');
@@ -66,3 +72,5 @@ Route::post('/remindme', [JobController::class, 'remind'])->name('remind');
 
 Route::get('/certificate', [CertificateController::class, 'index'])->name('certificate.index');
 Route::post('/certificate', [CertificateController::class, 'find'])->name('certificate.find');
+
+Route::get('/see-reminder', [JobController::class, 'see_reminder'])->name('see.reminder');
