@@ -165,7 +165,7 @@
     const chatInput = document.getElementById('chatInput');
 
     // Ganti URL ini jika sudah pindah ke Production (hapus -test)
-    const N8N_WEBHOOK_URL = 'https://upoinwerf23t.app.n8n.cloud/webhook/hiredhub-chatbot';
+    const N8N_WEBHOOK_URL = '{{ env('N8N_CHATBOT_WEBHOOK_URL') }}';
 
     function toggleChat() {
         chatWindow.classList.toggle('active');
