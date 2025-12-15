@@ -84,10 +84,11 @@
             <div class="d-flex flex-row flex-md-row justify-content-between text-start align-items-center mt-5 w-100 gap-5"
                 style="max-width:900px;">
                 <div class="me-md-3 mb-3 mb-md-0">
-                    <p class="fw-bold fs-1">Tired of Searching Jobs?</p>
+                    <p class="fw-bold fs-1 font-montserrat text-shadow-custom">Tired of Searching Jobs?</p>
                 </div>
                 <div class="w-100" style="max-width:500px;">
-                    <p class="fw-bold fs-6 fs-md-5 fs-lg-4 text-start">
+                    <p class="fw-semibold fs-6 fs-md-5 fs-lg-4 text-start font-inter">
+
                         We understand. HiredHub is your single source of truth.
                         Find all jobs, from all major platforms,
                         presented with the best filters for your career path.
