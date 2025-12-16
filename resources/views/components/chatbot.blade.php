@@ -208,7 +208,6 @@
 
         try {
             // 2. Kirim ke n8n
-            // Note: Pastikan node 'Webhook' di n8n method-nya adalah POST
             const response = await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: {
@@ -217,7 +216,7 @@
                 body: JSON.stringify({
                     chatInput: message,
                     sessionId: 'session-' + Math.random().toString(36).substr(2,
-                        9) // Opsional: untuk memory
+                        9) 
                 })
             });
 
@@ -226,8 +225,6 @@
             removeLoading();
 
             // 3. Tampilkan balasan dari n8n
-            // Asumsi: Output n8n json kamu memiliki key 'output' atau 'text'
-            // Sesuaikan 'data.output' dengan struktur JSON return n8n kamu
             const botReply = data[0].output;
             addMessage(botReply, 'bot');
 
