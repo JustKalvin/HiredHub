@@ -11,12 +11,6 @@
                 Home
             </a>
         </p>
-        <!-- <p class="fw-bold mb-0">
-            <a class="text-white text-decoration-none" data-bs-toggle="collapse" href="#browseForm" role="button"
-                aria-expanded="false" aria-controls="browseForm">
-                Browse Jobs
-            </a>
-        </p> -->
         <p class="fw-bold mb-0">
             <a class="text-white text-decoration-none" 
                href="#" 
@@ -28,17 +22,11 @@
                 Browse Jobs
             </a>
         </p>
-        <!-- <p class="fw-bold mb-0">
-            <a class="text-white text-decoration-none" href="/certificate" role="button">
-                Certificate
-            </a>
-        </p> -->
         <p class="fw-bold mb-0">
     <a class="text-white text-decoration-none" href="{{ route('certificate.index') }}" role="button">
         Certificate
     </a>
 </p>
-        <!-- <p class="fw-bold mb-0">About</p> -->
         <p class="fw-bold mb-0">
             <a class="text-white text-decoration-none" href="{{ route('about') }}" role="button">
                 About
@@ -108,7 +96,7 @@
                 <input type="text" name="geoId" class="form-control" id="geoId" placeholder="Enter Geo ID">
             </div>
 
-            <!-- Tambahan: Upload PDF -->
+            <!--  Upload PDF -->
             <div class="mb-3">
                 <div class="d-flex flex-row align-items-center">
                     <label for="cvFile" class="form-label text-white">Upload CV (PDF)</label>
