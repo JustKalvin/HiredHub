@@ -5,53 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
-    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>Home</title>
     <style>
-        /* FONT PENTING */
-        body {
-            /* 1. SEMUA TEKS default-nya adalah Inter */
-            font-family: 'Inter', sans-serif !important; 
-            background-color: white;
-        }
-
-        h1, h2, h3, h4, h5, h6, .font-montserrat {
-            /* 2. JUDUL/HEADER/ELEMEN PENTING adalah Montserrat */
-            font-family: 'Montserrat', sans-serif !important;
-            font-weight: 700;
-        }
-        
-        /* 3. TEXT SHADOW */
-        .text-shadow-custom {
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Dibuat lebih gelap untuk hero image */
-        }
-        
-        /* --- STYLE KHUSUS HALAMAN HOME --- */
-        
         /* Container hero */
         .hero-container {
             position: relative;
             width: 100%;
             height: 100vh;
+            /* full screen height */
             overflow: hidden;
             display: flex;
             justify-content: center;
+            /* center gambar horizontal */
             align-items: center;
+            /* center konten vertikal */
         }
 
         .hero-container-img {
-            width: 98%;
+            width: 90%;
             height: 95%;
             object-fit: cover;
             border-radius: 30px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 30px;
         }
 
         /* Konten tengah */
@@ -62,8 +39,7 @@
             transform: translate(-50%, -50%);
             z-index: 10;
             text-align: center;
-            /* Kita ubah warna ini agar sesuai dengan font, tapi tetap putih karena di atas gambar */
-            color: white !important; 
+            color: white;
         }
 
         /* Header di dalam gambar */
@@ -73,8 +49,9 @@
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
+            /* sama dengan width gambar */
             z-index: 100;
-            color: white !important;
+            color: white;
             padding: 1rem 0;
         }
 
@@ -83,12 +60,56 @@
             width: 100%;
             text-align: center;
             color: white;
+            /* padding: 1rem 0; */
             margin-top: auto;
         }
+
+        <style>
+    /* ... Style lama Anda di sini ... */
+
+    /* --- LOADING OVERLAY JOBS STYLES (DITAMBAH) --- */
+    #loading-overlay-job {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.95); /* Layer putih transparan */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    #loading-overlay-job.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #loading-overlay-job .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        color: #172B4D !important; /* Warna Primary Dark */
+    }
+    
+    #loading-overlay-job .loading-text {
+        color: #172B4D;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 15px;
+    }
+    /* ----------------------------------------------- */
+</style>
     </style>
 </head>
 
 <body style="background-color:#172B4D; margin:0;">
+    
+    
     <x-chatbot />
     <div class="hero-container">
         <!-- Background Image -->
@@ -106,11 +127,10 @@
             <div class="d-flex flex-row flex-md-row justify-content-between text-start align-items-center mt-5 w-100 gap-5"
                 style="max-width:900px;">
                 <div class="me-md-3 mb-3 mb-md-0">
-                    <p class="fw-bold fs-1 font-montserrat text-shadow-custom">Tired of Searching Jobs?</p>
+                    <p class="fw-bold fs-1">Tired of Searching Jobs?</p>
                 </div>
                 <div class="w-100" style="max-width:500px;">
-                    <p class="fw-semibold fs-6 fs-md-5 fs-lg-4 text-start font-inter text-shadow-custom">
-
+                    <p class="fw-bold fs-6 fs-md-5 fs-lg-4 text-start">
                         We understand. HiredHub is your single source of truth.
                         Find all jobs, from all major platforms,
                         presented with the best filters for your career path.
@@ -119,7 +139,7 @@
             </div>
 
             <!-- Button dan ikon -->
-            <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+            <!-- <div class="d-flex flex-column justify-content-center align-items-center mt-5">
                 <button class="text-white fw-bold"
                     style="width:200px; background-color:#4B5767; border:10px solid transparent; border-radius: 15px">
                     Get Hired Now!
@@ -127,6 +147,26 @@
                 <a href="#" class="mt-4">
                     <img src="./images/ClickLogo.png" style="width:80px;" alt="Click Logo">
                 </a>
+            </div> -->
+            <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+                
+                <button class="text-white fw-bold"
+                    type="button"
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#browseForm" 
+                    aria-expanded="false" 
+                    aria-controls="browseForm"
+                    style="width:200px; background-color:#4B5767; border:10px solid transparent; border-radius: 15px">
+                    Get Hired Now!
+                </button>
+
+                <a href="#" class="mt-4" 
+                   role="button"
+                   data-bs-toggle="collapse" 
+                   data-bs-target="#browseForm">
+                    <img src="./images/ClickLogo.png" style="width:80px;" alt="Click Logo">
+                </a>
+
             </div>
 
         </div>
@@ -141,6 +181,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

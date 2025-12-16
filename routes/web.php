@@ -7,33 +7,38 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+// =============================================================
+// RUTE UNTUK GUEST (Belum Login)
+// =============================================================
+
+// Rute Halaman Utama (Redirect Login/Home)
 Route::get('/', function () {
     if (Auth::check()) {
         return view('home');
     }
     return view('login');
-});
+})->name('home');
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
-Route::post('/job', [JobController::class, 'find'])->name('job.find');
+Route::get('/logout', function () {
+    Auth::logout(); 
+    request()->session()->invalidate(); 
+    request()->session()->regenerateToken(); 
+    return redirect('/login');
+})->name('logout');
 
+
+// --- Socialite Auth ---
 Route::get('/auth/google', function () {
-    /** @var \Laravel\Socialite\Two\AbstractProvider $provider */
-    $provider = Socialite::driver('google');
-
-    // Intelephense sekarang akan mengenali method with()
-    return $provider
-        ->with(['prompt' => 'select_account'])
-        ->redirect();
+    return Socialite::driver('google')->redirect();
 });
 
 Route::get('/auth/google/callback', function () {
     $googleUser = Socialite::driver('google')->user();
 
-    // Cari user berdasarkan email atau buat baru
     $user = User::updateOrCreate([
         'email' => $googleUser->getEmail(),
     ], [
@@ -44,33 +49,37 @@ Route::get('/auth/google/callback', function () {
 
     Auth::login($user);
 
-    return redirect('/');
+    // Arahkan ke halaman utama setelah login
+    return redirect('/'); 
 });
 
 
-Route::get('/logout', function () {
-    Auth::logout(); // Menghapus sesi user
-    request()->session()->invalidate(); // Menghapus session lama
-    request()->session()->regenerateToken(); // Mencegah CSRF reuse
-    return redirect('/login'); // Arahkan ke halaman utama setelah logout
-})->name('logout');
+// =============================================================
+// RUTE YANG MEMBUTUHKAN LOGIN (Middleware 'auth')
+// =============================================================
 
+Route::middleware(['auth'])->group(function () {
+    
+    // --- Rute Navigasi Utama ---
+    Route::get('/home', function () { return view('home'); });
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+    // [DITAMBAH]: Rute About (Pasti butuh login karena ini aplikasi)
+    Route::get('/about', function () { 
+        return view('about'); 
+    })->name('about');
+    
+    // --- Rute Job Finder & Reminder ---
+    Route::match(['get', 'post'], '/job', [JobController::class, 'find'])->name('job');
+    Route::post('/remindme', [JobController::class, 'remind'])->name('remind');
+    
+    // --- Rute Certificate ---
+    Route::get('/certificate', [CertificateController::class, 'index'])->name('certificate.index');
+    Route::post('/certificate', [CertificateController::class, 'find'])->name('certificate.find');
 
-Route::get('testlogin', function () {
-    return view('testlogin');
+    // [DITAMBAH]: Rute See Reminder (dari obrolan sebelumnya)
+    Route::get('/see-reminder', [JobController::class, 'see_reminder'])->name('see.reminder');
+    
+    // --- Rute Testing ---
+    Route::get('testlogin', function () { return view('testlogin'); });
+    Route::get('/test', function () { return view('test'); });
 });
-
-Route::get('/test', function () {
-    return view('test');
-});
-
-Route::post('/remindme', [JobController::class, 'remind'])->name('remind');
-
-Route::get('/certificate', [CertificateController::class, 'index'])->name('certificate.index');
-Route::post('/certificate', [CertificateController::class, 'find'])->name('certificate.find');
-
-Route::get('/see-reminder', [JobController::class, 'see_reminder'])->name('see.reminder');

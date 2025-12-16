@@ -11,18 +11,39 @@
                 Home
             </a>
         </p>
-        <p class="fw-bold mb-0">
+        <!-- <p class="fw-bold mb-0">
             <a class="text-white text-decoration-none" data-bs-toggle="collapse" href="#browseForm" role="button"
                 aria-expanded="false" aria-controls="browseForm">
                 Browse Jobs
             </a>
-        </p>
+        </p> -->
         <p class="fw-bold mb-0">
+            <a class="text-white text-decoration-none" 
+               href="#" 
+               role="button"
+               data-bs-toggle="collapse" 
+               data-bs-target="#browseForm" 
+               aria-expanded="false" 
+               aria-controls="browseForm">
+                Browse Jobs
+            </a>
+        </p>
+        <!-- <p class="fw-bold mb-0">
             <a class="text-white text-decoration-none" href="/certificate" role="button">
                 Certificate
             </a>
+        </p> -->
+        <p class="fw-bold mb-0">
+    <a class="text-white text-decoration-none" href="{{ route('certificate.index') }}" role="button">
+        Certificate
+    </a>
+</p>
+        <!-- <p class="fw-bold mb-0">About</p> -->
+        <p class="fw-bold mb-0">
+            <a class="text-white text-decoration-none" href="{{ route('about') }}" role="button">
+                About
+            </a>
         </p>
-        <p class="fw-bold mb-0">About</p>
     </div>
 
     <!-- Circle icon -->
@@ -64,12 +85,13 @@
     </div>
 </header>
 
+
 <!-- Collapse form di luar header -->
 <div class="collapse position-fixed top-0 start-0 w-100 h-100" id="browseForm" style="z-index:2000;">
     <div class="d-flex justify-content-center align-items-start pt-5 w-100 h-100"
         style="background-color: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">
 
-        <form action="{{ route('job.find') }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('job') }}" method="POST" enctype="multipart/form-data"
             class="p-4 position-relative" style="background-color:#172B4D; border-radius:10px; width:300px;">
             @csrf
             <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2"
@@ -101,3 +123,4 @@
 
     </div>
 </div>
+
