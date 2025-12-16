@@ -15,7 +15,6 @@
             /* bg-light */
         }
 
-        /* Custom CSS buat hero section */
         .hero-section {
             background-color: #172B4D;
             color: white;
