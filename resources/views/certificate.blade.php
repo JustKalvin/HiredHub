@@ -122,7 +122,6 @@
         }
         
         .loading-message {
-             /* Pastikan warna primary dark sudah didefinisikan di :root atau style lain */
              color: #172B4D; 
              font-weight: bold;
         }
@@ -154,7 +153,6 @@
         {{-- JUDUL DAN FORM PENCARIAN BARU --}}
         <h1 class="mb-4 fw-bold section-title"><i class="fa-solid fa-graduation-cap me-2"></i> Find Certificate</h1>
 
-        <!-- <form action="{{ route('certificate.find') }}" method="POST" class="mb-5"> -->
             <form id="certificate-search-form" action="{{ route('certificate.find') }}" method="POST" class="mb-5">
             @csrf
             <div class="input-group input-group-lg shadow-sm">
