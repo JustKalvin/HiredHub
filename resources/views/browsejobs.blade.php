@@ -20,8 +20,6 @@
             background-color: var(--bg-light);
             color: var(--primary-dark);
         }
-
-        /* --- STYLES UNTUK JOB CARD (KARTU KERJA) --- */
         .job-card {
             background: #fff;
             border: 1px solid #EBECF0;
@@ -80,7 +78,6 @@
             color: #fff;
         }
 
-        /* --- STYLES UNTUK MODAL (POPUP) --- */
         .description-placeholder {
             background-color: #F4F5F7;
             border-radius: 12px;
@@ -110,15 +107,6 @@
                 <p class="text-muted">Result for: <strong>{{ $keywords }}</strong> inside <strong>{{ $geoId }}</strong></p>
             </div>
 
-            {{-- Tombol Remind Me --}}
-            <!-- <form action="{{ route('remind') }}" method="POST">
-                @csrf
-                <input type="text" name="keywords" value="{{ $keywords }}" hidden>
-                <input type="text" name="geoId" value="{{ $geoId }}" hidden>
-                <button class="btn btn-outline-dark fw-bold" type="submit">
-                    <i class="fa-regular fa-bell me-2"></i> Remind Me
-                </button>
-            </form> -->
             <form action="{{ route('remind') }}" method="POST">
     @csrf
     {{-- Pastikan value-nya mengambil variabel $keywords dari controller --}}
@@ -132,10 +120,10 @@
 
         </div>
 
-        {{-- Cek Data Jobs --}}
+        
         @if (!empty($jobs) && (is_array($jobs) || $jobs instanceof \Illuminate\Support\Collection))
 
-            {{-- Grouping Berdasarkan Platform (LinkedIn, Glints, dll) --}}
+        
             @foreach (collect($jobs)->groupBy('from') as $from => $jobList)
                 
                 <h3 class="text-capitalize mt-5 mb-3 fw-bold" style="color: #172B4D">
@@ -148,25 +136,25 @@
                             // --- LOGIKA PEMBERSIH & PERSIAPAN DATA ---
                             $companyName = $job['companyName'] ?? 'Unknown Company';
                             $location = $job['location'] ?? 'Location not specified';
-                            $jobTitle = $job['jobTitle'] ?? 'Job Title'; // <--- Kita bersihkan ini juga
+                            $jobTitle = $job['jobTitle'] ?? 'Job Title'; 
                             $postedTime = $job['postedTime'] ?? 'Recently';
 
-                            // 1. Bersihkan Nama Perusahaan
+        
                             if (str_contains($companyName, '*') || str_contains($companyName, '\*')) {
                                 $companyName = 'Confidential Company';
                             }
 
-                            // 2. Bersihkan Lokasi
+            
                             if (str_contains($location, '*') || str_contains($location, '\*')) {
                                 $location = 'Location Hidden';
                             }
                             
-                            // 3. [BARU] Bersihkan Judul Pekerjaan
+                         
                             if (str_contains($jobTitle, '*') || str_contains($jobTitle, '\*')) {
                                 $jobTitle = 'Confidential Position'; // Ganti jadi teks rapi
                             }
 
-                            // Buat ID unik untuk Modal
+                      
                             $modalId = 'jobModal-' . \Illuminate\Support\Str::slug($from) . '-' . $loop->parent->index . '-' . $index;
                         @endphp
 
