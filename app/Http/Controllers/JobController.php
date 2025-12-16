@@ -10,23 +10,19 @@ use Illuminate\Support\Facades\Http;
 
 class JobController extends Controller
 {
-    // --- 1. FUNCTION FIND (Cari Kerja) ---
     public function find(Request $request)
     {
         $keywords = $request->input('keywords');
         $geoId = $request->input('geoId');
         $file = $request->file('file');
 
-        // PERBAIKAN: Ambil link dari .env (bukan hardcode webhook-test lagi)
         $jobScrappingUrl = env('N8N_JOB_SCRAPPING_WEBHOOK_URL');
 
-        // Pengaman jika .env belum diset
         if (empty($jobScrappingUrl)) {
              return view('browsejobs', compact('jobs', 'keywords', 'geoId'))
                 ->with('error', 'Link Webhook N8N belum disetting di .env');
         }
 
-        // Jika ada file, kirim dengan attach()
         if ($file) {
             $response = Http::attach(
                 'file',                      
@@ -37,7 +33,6 @@ class JobController extends Controller
                 'geoId' => $geoId
             ]);
         }
-        // Jika tidak ada file
         else {
             $response = Http::post($jobScrappingUrl, [
                 'keywords' => $keywords,
@@ -57,66 +52,9 @@ class JobController extends Controller
         return view('browsejobs', compact('jobs', 'keywords', 'geoId'));
     }
 
-    // // --- 2. FUNCTION REMIND (Simpan Reminder) ---
-    // public function remind(Request $request)
-    // {
-    //     // Pastikan user sudah login
-    //     if (!Auth::check()) {
-    //         return response()->json(['error' => 'User belum login'], 401);
-    //     }
-
-    //     // Ambil data dan ubah ke lowercase
-    //     $email = strtolower(Auth::user()->email);
-    //     $keyword = strtolower($request->keywords);
-    //     $geoId = strtolower($request->geoId);
-
-    //     // Cek apakah data sudah ada
-    //     $existing = UserRemind::where('user_email', $email)
-    //         ->where('user_keyword', $keyword)
-    //         ->first();
-
-    //     // if ($existing) {
-    //     //     return response()->json([
-    //     //         'message' => 'Data sudah ada, tidak perlu insert ulang.',
-    //     //         'data' => $existing
-    //     //     ]);
-    //     // }
-    //     if ($existing) {
-    //         return redirect()->back()->with('warning', 'You already have an active reminder for "' . $request->keywords . '"');
-    //     }
-
-    //     // Simpan ke database lokal
-    //     $remind = UserRemind::create([
-    //         'user_email' => $email,
-    //         'user_keyword' => $keyword,
-    //         'user_geoId' => $geoId
-    //     ]);
-
-    //     // PERBAIKAN: Ambil link dari .env (Link Insert Trigger)
-    //     $remindInsertUrl = env('N8N_REMIND_INSERT_WEBHOOK_URL');
-
-    //     if ($remindInsertUrl) {
-    //         // Kirim data ke N8N
-    //         $response = Http::post($remindInsertUrl, [
-    //             'user_email' => $remind->user_email,
-    //             'user_keyword' => $remind->user_keyword,
-    //             'user_geoId' => $remind->user_geoId,
-    //         ]);
-
-    //         // Log jika gagal
-    //         if ($response->failed()) {
-    //             Log::error('Gagal kirim ke N8N', [
-    //                 'status' => $response->status(),
-    //                 'body' => $response->body(),
-    //             ]);
-    //         }
-    //     }
-
-    //     return view('home');
-    // }
     public function remind(Request $request)
     {
-        // 1. [DIUBAH] Pastikan user sudah login (Redirect ke login kalau belum)
+        // 1. mastiin user sudah login (Redirect ke login kalau belum)
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Please login first to set a reminder.');
         }
@@ -131,7 +69,7 @@ class JobController extends Controller
             ->where('user_keyword', $keyword)
             ->first();
 
-        // Kalau ada, kembalikan dengan pesan warning (Ini sudah benar di kodemu)
+        // Kalau ada, kembaliin dengan pesan warning 
         if ($existing) {
             return redirect()->back()->with('warning', 'You already have an active reminder for "' . $request->keywords . '"');
         }
@@ -143,12 +81,10 @@ class JobController extends Controller
             'user_geoId' => $geoId
         ]);
 
-        // --- BAGIAN N8N (TETAP DIPERTAHANKAN) ---
         $remindInsertUrl = env('N8N_REMIND_INSERT_WEBHOOK_URL');
 
         if ($remindInsertUrl) {
             // Kirim data ke N8N
-            // (Kita pakai try-catch sedikit supaya kalau N8N error, web tidak crash)
             try {
                 $response = Http::post($remindInsertUrl, [
                     'user_email' => $remind->user_email,
@@ -168,14 +104,13 @@ class JobController extends Controller
             }
         }
 
-        // 2. [DIUBAH] Balik ke halaman sebelumnya dengan pesan Sukses
         return redirect()->route('job', [
             'keywords' => $request->input('keywords'),
             'geoId' => $request->input('geoId')
         ])->with('success', 'Reminder set successfully! We will notify you.');
     }
 
-    // --- 3. FUNCTION SEE REMINDER (Lihat Reminder) ---
+    // --- 2. FUNCTION Lihat Reminder) ---
     public function see_reminder()
     {
         // A. Cek Login
@@ -187,8 +122,6 @@ class JobController extends Controller
         
         // Ambil URL dari .env
         $seeReminderUrl = env('N8N_SEE_REMINDER_WEBHOOK_URL');
-
-        // Pengaman kalau URL lupa diisi di .env
         if (empty($seeReminderUrl)) {
              return view('seereminder', ['reminders' => []])
                 ->with('error', 'Webhook URL belum disetting di file .env');
@@ -208,11 +141,9 @@ class JobController extends Controller
         if ($response->successful()) {
             $reminders = $response->json();
             
-            // Paksa jadi array kalau response aneh
             if (!is_array($reminders)) {
                 $reminders = [];
             }
-            // dd($reminders);
 
             return view('seereminder', [
                 'reminders' => $reminders,
