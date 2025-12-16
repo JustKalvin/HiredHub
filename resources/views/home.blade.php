@@ -19,7 +19,6 @@
             /* 1. SEMUA TEKS default-nya adalah Inter */
             font-family: 'Inter', sans-serif !important; 
             background-color: white;
-            color: #172B4D; /* Warna teks default */
         }
 
         h1, h2, h3, h4, h5, h6, .font-montserrat {
@@ -47,11 +46,12 @@
         }
 
         .hero-container-img {
-            width: 90%;
+            width: 98%;
             height: 95%;
             object-fit: cover;
             border-radius: 30px;
-            margin-top: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         /* Konten tengah */
