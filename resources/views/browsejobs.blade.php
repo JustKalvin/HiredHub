@@ -6,35 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Browse Jobs</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- CSS Kustom yang Diperbarui --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* CSS Sederhana untuk mencocokkan tema gelap dari template Anda */
+        /* FONT PENTING */
         body {
+            /* 1. SEMUA TEKS default-nya adalah Inter */
+            font-family: 'Inter', sans-serif !important; 
             background-color: white;
-            /* bg-dark */
-            /* color: #f8f9fa; <-- DIHAPUS, konflik dengan bg white */
-            /* text-white */
+            color: #172B4D; /* Warna teks default */
         }
 
+        h1, h2, h3, h4, h5, h6, .font-montserrat {
+            /* 2. JUDUL/HEADER/ELEMEN PENTING adalah Montserrat */
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+        }
+        
+        /* 3. TEXT SHADOW (Untuk Judul di Halaman Home/Lain) */
+        .text-shadow-custom {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- STYLE KHUSUS HALAMAN BROWSE JOBS --- */
+        
         .card {
-            background-color: #343a40;
-            /* bg-secondary */
+            /* Perhatikan: Kamu menggunakan bg-color: #343a40 di CSS, tapi di Blade kamu pakai #DAE1E9. 
+               Kita akan pakai #343a40 sesuai CSS di sini, atau ganti di HTML-nya. */
+            background-color: #343a40; 
             border: none;
+            /* Kita perlu pastikan teks di dalam card yang berwarna gelap tetap terbaca */
+            color: white; 
         }
 
+        /* Judul Card Link (Harus Montserrat) */
         .card-title a {
             color: #172B4D !important;
-            /* <-- DIUBAH ke warna baru */
-            /* text-white */
             text-decoration: none;
+            font-family: 'Montserrat', sans-serif !important;
         }
 
         .card-title a:hover {
             text-decoration: underline;
         }
 
+        /* Link teks putih yang didekorasi */
         .text-white-decoration-none {
             color: #f8f9fa !important;
             text-decoration: none;
@@ -44,11 +65,11 @@
             text-decoration: underline;
         }
 
+        /* Footer */
         .footer {
             width: 100%;
             text-align: center;
             color: white;
-            /* padding: 1rem 0; */
             margin-top: auto;
         }
     </style>

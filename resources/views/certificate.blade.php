@@ -5,31 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificate</title>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        /* FONT PENTING */
         body {
+            /* 1. SEMUA TEKS default-nya adalah Inter */
+            font-family: 'Inter', sans-serif !important; 
             background-color: white;
+            color: #172B4D; /* Warna teks default */
         }
 
+        h1, h2, h3, h4, h5, h6, .font-montserrat {
+            /* 2. JUDUL/HEADER/ELEMEN PENTING adalah Montserrat */
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+        }
+        
+        /* 3. TEXT SHADOW (Untuk Judul di Halaman Lain) */
+        .text-shadow-custom {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* --- STYLE KHUSUS HALAMAN CERTIFICATE --- */
         .card {
             background-color: #DAE1E9;
             border: none;
         }
 
+        /* Kita tambahkan font Montserrat ke card title link agar konsisten */
         .card-title a {
             color: #172B4D;
             text-decoration: none;
+            font-family: 'Montserrat', sans-serif !important; /* Paksa Montserrat */
         }
 
         .card-title a:hover {
             text-decoration: underline;
         }
 
+        /* Kita tambahkan font Montserrat ke section title agar konsisten */
         .section-title {
             color: #172B4D;
             font-weight: bold;
+            font-family: 'Montserrat', sans-serif !important; /* Paksa Montserrat */
         }
     </style>
 </head>

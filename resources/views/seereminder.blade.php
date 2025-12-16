@@ -7,16 +7,33 @@
     <title>Job Reminders</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         body {
+            /* 1. SEMUA TEKS default-nya adalah Inter */
+            font-family: 'Inter', sans-serif !important; 
             background-color: white;
         }
 
+        h1, h2, h3, h4, h5, h6, .font-montserrat {
+            /* 2. JUDUL/HEADER/ELEMEN PENTING adalah Montserrat */
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+        }
+        
+        .text-shadow-custom {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* --- STYLE KHUSUS HALAMAN INI --- */
         .card-job {
             background-color: #DAE1E9;
-            /* Warna latar belakang card seperti contoh */
             border: none;
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -26,7 +43,9 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
+        /* Karena judul kartu adalah link, kita harus pastikan dia pakai Montserrat */
         .card-title a {
+            font-family: 'Montserrat', sans-serif !important; /* Paksa Montserrat */
             color: #172B4D;
             text-decoration: none;
             font-weight: bold;
@@ -39,6 +58,7 @@
         .section-title {
             color: #172B4D;
             font-weight: bold;
+            font-family: 'Montserrat', sans-serif !important; /* Paksa Montserrat */
         }
 
         .company-name {

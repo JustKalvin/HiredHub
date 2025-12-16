@@ -5,22 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Home</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        /* FONT PENTING */
+        body {
+            /* 1. SEMUA TEKS default-nya adalah Inter */
+            font-family: 'Inter', sans-serif !important; 
+            background-color: white;
+            color: #172B4D; /* Warna teks default */
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-montserrat {
+            /* 2. JUDUL/HEADER/ELEMEN PENTING adalah Montserrat */
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+        }
+        
+        /* 3. TEXT SHADOW */
+        .text-shadow-custom {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Dibuat lebih gelap untuk hero image */
+        }
+        
+        /* --- STYLE KHUSUS HALAMAN HOME --- */
+        
         /* Container hero */
         .hero-container {
             position: relative;
             width: 100%;
             height: 100vh;
-            /* full screen height */
             overflow: hidden;
             display: flex;
             justify-content: center;
-            /* center gambar horizontal */
             align-items: center;
-            /* center konten vertikal */
         }
 
         .hero-container-img {
@@ -39,7 +62,8 @@
             transform: translate(-50%, -50%);
             z-index: 10;
             text-align: center;
-            color: white;
+            /* Kita ubah warna ini agar sesuai dengan font, tapi tetap putih karena di atas gambar */
+            color: white !important; 
         }
 
         /* Header di dalam gambar */
@@ -49,9 +73,8 @@
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            /* sama dengan width gambar */
             z-index: 100;
-            color: white;
+            color: white !important;
             padding: 1rem 0;
         }
 
@@ -60,7 +83,6 @@
             width: 100%;
             text-align: center;
             color: white;
-            /* padding: 1rem 0; */
             margin-top: auto;
         }
     </style>
@@ -87,7 +109,7 @@
                     <p class="fw-bold fs-1 font-montserrat text-shadow-custom">Tired of Searching Jobs?</p>
                 </div>
                 <div class="w-100" style="max-width:500px;">
-                    <p class="fw-semibold fs-6 fs-md-5 fs-lg-4 text-start font-inter">
+                    <p class="fw-semibold fs-6 fs-md-5 fs-lg-4 text-start font-inter text-shadow-custom">
 
                         We understand. HiredHub is your single source of truth.
                         Find all jobs, from all major platforms,
