@@ -65,9 +65,7 @@
         }
 
         <style>
-    /* ... Style lama Anda di sini ... */
 
-    /* --- LOADING OVERLAY JOBS STYLES (DITAMBAH) --- */
     #loading-overlay-job {
         position: fixed;
         top: 0;
@@ -102,7 +100,6 @@
         font-weight: 600;
         margin-top: 15px;
     }
-    /* ----------------------------------------------- */
 </style>
     </style>
 </head>
@@ -138,16 +135,6 @@
                 </div>
             </div>
 
-            <!-- Button dan ikon -->
-            <!-- <div class="d-flex flex-column justify-content-center align-items-center mt-5">
-                <button class="text-white fw-bold"
-                    style="width:200px; background-color:#4B5767; border:10px solid transparent; border-radius: 15px">
-                    Get Hired Now!
-                </button>
-                <a href="#" class="mt-4">
-                    <img src="./images/ClickLogo.png" style="width:80px;" alt="Click Logo">
-                </a>
-            </div> -->
             <div class="d-flex flex-column justify-content-center align-items-center mt-5">
                 
                 <button class="text-white fw-bold"
