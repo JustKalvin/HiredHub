@@ -62,8 +62,7 @@ Route::middleware(['auth'])->group(function () {
     
     // --- Rute Navigasi Utama ---
     Route::get('/home', function () { return view('home'); });
-
-    // [DITAMBAH]: Rute About (Pasti butuh login karena ini aplikasi)
+// about
     Route::get('/about', function () { 
         return view('about'); 
     })->name('about');
@@ -76,7 +75,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/certificate', [CertificateController::class, 'index'])->name('certificate.index');
     Route::post('/certificate', [CertificateController::class, 'find'])->name('certificate.find');
 
-    // [DITAMBAH]: Rute See Reminder (dari obrolan sebelumnya)
     Route::get('/see-reminder', [JobController::class, 'see_reminder'])->name('see.reminder');
     
     // --- Rute Testing ---
