@@ -55,7 +55,7 @@
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
 
-                const result = await response.text(); // gunakan .json() jika response berupa JSON
+                const result = await response.text();
                 statusEl.textContent = '✅ Berhasil dikirim! Respons: ' + result;
             } catch (error) {
                 statusEl.textContent = '❌ Terjadi kesalahan: ' + error.message;
